@@ -51,11 +51,11 @@ For production, I would compare stronger embedding models on exact course-code m
 
 Summary of three retrieval tests:
 
-| Query | Result summary |
-|---|---|
-| What topics do students say are usually covered in CS3510? | The CS3510 chunk was retrieved, but ranked second behind a broader course-load chunk. |
+| Query                                                          | Result summary                                                                                              |
+| -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| What topics do students say are usually covered in CS3510?     | The CS3510 chunk was retrieved, but ranked second behind a broader course-load chunk.                       |
 | Why do students say CS4641 can be stressful or time-consuming? | Retrieved the combined CS2200/CS4641 workload chunk first and the dedicated CS4641 difficulty chunk second. |
-| How do students distinguish CS3210 and CS3220? | Correctly retrieved the CS3210-vs-CS3220 comparison chunk first. |
+| How do students distinguish CS3210 and CS3220?                 | Correctly retrieved the CS3210-vs-CS3220 comparison chunk first.                                            |
 
 ## Grounded Generation
 
