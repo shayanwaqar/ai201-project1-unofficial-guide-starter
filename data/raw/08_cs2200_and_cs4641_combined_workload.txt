@@ -1,0 +1,26 @@
+Title: CS2200 and CS4641 Together: Combined Workload and Drop Decision
+Source title: Advice from CS majors about dropping CS2200 or CS4641 - r/gatech
+Source URL: https://www.reddit.com/r/gatech/comments/5rlh50/asking_advice_from_cs_majors_do_you_believe_it_is/
+Source type: Reddit thread / student discussion
+Domain tags: CS2200, CS4641, workload, dropping classes, threads, grad school, time management
+Corpus note: This is a manually curated source brief for a class RAG corpus. It is not a full reproduction of the source thread. It preserves the source URL and summarizes/paraphrases relevant student discussion so the RAG system can answer grounded questions.
+
+Summary:
+A student taking CS2200 and CS4641 together describes struggling because CS2200 requires substantial reading and CS4641 requires time-consuming ML projects. A former CS2200 TA responds that the combination is intensive and encourages evaluating whether the student can handle the workload while still sleeping and maintaining a livable schedule.
+
+Extracted source notes:
+- The original poster says they are taking 16 credits with CS2200 and CS4641 and are struggling to keep up with both simultaneously.
+- They attribute the difficulty to CS2200 needing a lot of reading and CS4641 needing time to run homework algorithms and learn ML concepts without prior experience.
+- They say CS2200 feels fast-paced and that CS4641 projects are taking so much time that they are lagging behind in CS2200.
+- A former CS2200 TA says the student picked two intensive classes, but workload depends on the rest of the schedule and prior background.
+- The TA advises thinking about what load can be handled while still sleeping, doing well, and not hating life.
+- The source is useful for questions about combining systems and ML courses in one semester.
+
+Answerable questions:
+- Why might CS2200 and CS4641 be hard to take together?
+- What makes CS2200 time-consuming according to students?
+- What makes CS4641 time-consuming according to students?
+- How should students decide whether to drop a course?
+
+Sample grounded answer based on this source:
+Students report that CS2200 plus CS4641 can be a rough combination because CS2200 requires significant reading and fast-paced systems material, while CS4641 projects can take a lot of time to run and understand. The advice is to judge the full schedule realistically, including sleep and ability to keep up, rather than focusing only on credit hours.

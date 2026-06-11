@@ -1,0 +1,26 @@
+Title: CS3510 Algorithms: Topics and Study Strategy
+Source title: CS3510 topics? - r/gatech
+Source URL: https://www.reddit.com/r/gatech/comments/b5511z/cs3510_topics/
+Source type: Reddit thread / student discussion
+Domain tags: CS3510, Algorithms, Theory, proofs, pseudocode, workload, study strategy
+Corpus note: This is a manually curated source brief for a class RAG corpus. It is not a full reproduction of the source thread. It preserves the source URL and summarizes/paraphrases relevant student discussion so the RAG system can answer grounded questions.
+
+Summary:
+Students describe CS3510 as a math-heavy algorithms course focused on proofs, pseudocode, and conceptual understanding rather than programming. Common topics include dynamic programming, divide and conquer, graph algorithms, and NP-completeness, with some variation by professor.
+
+Extracted source notes:
+- One commenter says CS3510 usually covers Dynamic Programming, Divide and Conquer, Graph Problems, and NP-Completeness, and is mostly math proofs and pseudocode rather than actual programming languages.
+- A former HTA notes that professors generally use the Dasgupta, Papadimitriou, and Vazirani algorithms textbook, though the order and optional topics vary.
+- Common shared topics include divide and conquer, number theory, graph theory such as DFS, shortest paths and MSTs, and NP-completeness.
+- Other topics, including Huffman encoding, max flow, FFT, and linear programming, may vary depending on the professor.
+- The same commenter says the course is scary to some students because it is more math-heavy than expected, and memorization alone is not enough without understanding.
+- Recommended strategies include office hours and practice problems.
+
+Answerable questions:
+- What topics do students say are usually covered in CS3510?
+- Is CS3510 more coding-heavy or proof-heavy?
+- What study strategies do students recommend for CS3510?
+- Which CS3510 topics vary by professor?
+
+Sample grounded answer based on this source:
+For CS3510, students describe the core as algorithms theory: dynamic programming, divide and conquer, graph problems, number theory, and NP-completeness. It is not mainly a programming class; students frame it as proof- and pseudocode-heavy. The practical advice is to focus on understanding, practice problems, and office hours rather than memorizing patterns.

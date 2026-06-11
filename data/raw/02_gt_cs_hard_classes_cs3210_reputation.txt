@@ -1,0 +1,25 @@
+Title: Georgia Tech CS Hard Classes: CS3210 Reputation
+Source title: What are considered the hell/hard classes of a CS degree? - r/gatech
+Source URL: https://www.reddit.com/r/gatech/comments/zt0ayl/what_are_considered_the_hell_hard_classes_of_a_cs/
+Source type: Reddit thread / student discussion
+Domain tags: CS3210, OS Design, hard classes, workload, systems, upper-level CS
+Corpus note: This is a manually curated source brief for a class RAG corpus. It is not a full reproduction of the source thread. It preserves the source URL and summarizes/paraphrases relevant student discussion so the RAG system can answer grounded questions.
+
+Summary:
+Students repeatedly identify CS3210 Operating Systems Design as one of the more difficult Georgia Tech CS courses. The difficulty is described as variable by professor and semester, but the class has a strong reputation for being demanding.
+
+Extracted source notes:
+- A student says CS3210 is notoriously hard and was quite difficult when they took it, while also noting the difficulty can vary by professor.
+- Another commenter says difficulty can change over time; in their semester it was much easier, but graduate-level OS courses were very serious.
+- The thread frames hard classes as dependent on professor, semester, background, and expectations rather than fixed labels.
+- The main reliable takeaway is not that every CS3210 offering is equally impossible, but that students widely associate OS Design with high workload and difficulty.
+- This source is useful for questions about perceived class difficulty, not exact grading policy.
+
+Answerable questions:
+- Which CS class is often described as notoriously hard?
+- Does CS3210 difficulty seem to vary by professor?
+- Can this source prove exact CS3210 grading policy?
+- How do students describe upper-level OS difficulty?
+
+Sample grounded answer based on this source:
+Students often point to CS3210 Operating Systems Design as a hard Georgia Tech CS course. However, comments also warn that the experience varies by professor and semester, so the source supports a reputation for difficulty but not a universal grading rule.

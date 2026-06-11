@@ -1,0 +1,26 @@
+Title: CS3210 vs CS3220: OS Design vs Processor Design
+Source title: CS3210 or CS3220 - r/gatech
+Source URL: https://www.reddit.com/r/gatech/comments/4a31gy/cs_3210_or_cs_3220/
+Source type: Reddit thread / student discussion
+Domain tags: CS3210, CS3220, OS Design, Processor Design, Verilog, FPGA, C, kernel, systems
+Corpus note: This is a manually curated source brief for a class RAG corpus. It is not a full reproduction of the source thread. It preserves the source URL and summarizes/paraphrases relevant student discussion so the RAG system can answer grounded questions.
+
+Summary:
+Students compare CS3220 as more processor-design and implementation-heavy, while CS3210 is described as a deeper operating systems course with C, kernel work, virtual memory, user environments, and time-consuming labs. Some students prefer CS3220 for implementation while others praise CS3210 as rewarding if enough time is available.
+
+Extracted source notes:
+- One commenter says CS3220 has students design and implement a processor similar to CS2200, using Verilog on an FPGA and later adding pipelining.
+- The same commenter says CS3210 goes much deeper into operating systems than CS2200 and may include industry papers, textbook material, Linux kernel work, and C implementation.
+- That commenter personally preferred CS3220 because it was more implementation-heavy and viewed 3210 as too theory-heavy.
+- Another commenter says a CS3210 offering modeled after MIT 6.828 was awesome because students build a skeleton OS over the semester with virtual memory, user environments, and later a network driver.
+- Multiple comments warn that CS3210 labs require a lot of time per week and stronger knowledge of CPU registers and memory.
+- The source supports questions about systems course selection and tradeoffs between OS and processor design.
+
+Answerable questions:
+- How do students distinguish CS3210 and CS3220?
+- Which course is described as more implementation-heavy?
+- What does CS3210 involve in some offerings?
+- Why should students be cautious before taking CS3210?
+
+Sample grounded answer based on this source:
+Students describe CS3220 as processor design with Verilog/FPGA implementation and pipelining, while CS3210 goes deeper into OS concepts and may involve C, kernel work, virtual memory, user environments, and time-consuming labs. CS3210 can be rewarding, but students warn to take it only if they can spare substantial time.

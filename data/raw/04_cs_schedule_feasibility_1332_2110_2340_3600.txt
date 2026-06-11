@@ -1,0 +1,25 @@
+Title: CS Schedule Feasibility: CS1332, CS2110, CS2340, CS3600
+Source title: [CS] Does this seem like a feasible workload each semester? - r/gatech
+Source URL: https://www.reddit.com/r/gatech/comments/37b1cc/cs_does_this_seem_like_a_feasible_workload_each/
+Source type: Reddit thread / student discussion
+Domain tags: CS1332, CS2110, CS2340, CS3600, course load, schedule planning, time management
+Corpus note: This is a manually curated source brief for a class RAG corpus. It is not a full reproduction of the source thread. It preserves the source URL and summarizes/paraphrases relevant student discussion so the RAG system can answer grounded questions.
+
+Summary:
+Students warn that taking CS1332, CS2110, CS2340, and CS3600 together can be rough, especially for someone moving from minimal coding experience into several different CS courses at once. The advice emphasizes spreading out difficult CS classes and adding variety to make the semester more manageable.
+
+Extracted source notes:
+- A commenter suggests spreading the schedule out because going from CS1331 to four very different CS courses is a large jump.
+- The same commenter says taking just CS1332, CS2110, and CS2340 can be difficult for students inexperienced with coding, and adding another non-trivial course makes it worse.
+- The advice suggests keeping CS1332 but replacing one or two of CS3600, CS2340, and CS2110 with non-CS or different courses such as economics or combinatorics depending on the student plan.
+- Another commenter says the difficulty depends on ability and time management, but that both proposed semesters looked bad unless the student learns quickly, has strong math skills, and manages time well.
+- The useful takeaway is that credit hours alone can understate workload; course mix matters more than the raw number of hours.
+
+Answerable questions:
+- Is taking CS1332, CS2110, CS2340, and CS3600 together recommended?
+- Why do students recommend spreading out these CS courses?
+- What background makes this schedule more manageable?
+- Does a lower-credit semester always mean easier workload?
+
+Sample grounded answer based on this source:
+Students generally warn against stacking CS1332, CS2110, CS2340, and CS3600 together, especially after only CS1331-level experience. The concern is not just credit hours but the mix of several different, demanding CS courses at once. The advice is to spread out the CS load and add variety where possible.

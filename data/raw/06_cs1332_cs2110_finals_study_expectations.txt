@@ -1,0 +1,26 @@
+Title: CS1332 and CS2110 Finals: Study Expectations
+Source title: How was the final for CS1332 and CS2110? - r/gatech
+Source URL: https://www.reddit.com/r/gatech/comments/72ad9f/how_was_the_final_for_cs_1332_and_cs_2110/
+Source type: Reddit thread / student discussion
+Domain tags: CS1332, CS2110, finals, exams, study guides, data structures, computer organization
+Corpus note: This is a manually curated source brief for a class RAG corpus. It is not a full reproduction of the source thread. It preserves the source URL and summarizes/paraphrases relevant student discussion so the RAG system can answer grounded questions.
+
+Summary:
+Students describe the CS2110 final as generally fair when aligned with the study guide, while CS1332 finals seem more variable by semester. Some comments say keeping up with coursework and studying provided material makes both classes manageable, but students also warn that CS1332 can become harder if exam averages are high.
+
+Extracted source notes:
+- One student says the CS2110 final is always super fair because the study guide and final are made as a set, so the guide indicates content and question types.
+- The same comment says CS1332 depends: some semesters the final is very difficult if averages are too high, while other semesters are more manageable.
+- For an easy CS1332 final, the advice is to know the data structures and algorithms covered; for a hard final, study anything mentioned in lecture because unexpected questions may appear.
+- Another student says they did not find either final very hard because there was lots of help and study material available.
+- A later comment says one CS1332 final felt surface-level to moderately difficult and reused familiar question types except one.
+- The source supports nuanced answers: CS2110 final preparation appears more guided, while CS1332 final difficulty varies more.
+
+Answerable questions:
+- How do students describe the CS2110 final?
+- Why is CS1332 final difficulty described as variable?
+- What should students study for CS1332?
+- Do students think taking CS1332 and CS2110 together is impossible?
+
+Sample grounded answer based on this source:
+Students describe CS2110 finals as relatively fair when the provided study guide is used seriously. CS1332 is more variable: in some semesters the final is manageable, but if earlier exam averages are high, students expect a harder final with possible gotcha-style questions. Keeping up with coursework and provided study material is the safest strategy.

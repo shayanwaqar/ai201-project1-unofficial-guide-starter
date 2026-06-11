@@ -1,0 +1,26 @@
+Title: CS3210 Operating Systems Design: Credit Hours and Workload Concerns
+Source title: Petition to increase credit hours and course number (CS3210) - r/gatech
+Source URL: https://www.reddit.com/r/gatech/comments/4ajm5t/petition_to_increase_credit_hours_and_course/
+Source type: Reddit thread / student discussion
+Domain tags: CS3210, Operating Systems Design, workload, labs, readings, exams, credit hours
+Corpus note: This is a manually curated source brief for a class RAG corpus. It is not a full reproduction of the source thread. It preserves the source URL and summarizes/paraphrases relevant student discussion so the RAG system can answer grounded questions.
+
+Summary:
+A student argues that CS3210 should not be treated like a normal 3-credit 3000-level class because the lab workload and technical reading are much heavier than expected. The post describes OS Design as one of the hardest but also most rewarding courses the student had taken.
+
+Extracted source notes:
+- The poster says CS3210 was by far the hardest course they had taken at Tech at that point.
+- They describe the labs and readings as unparalleled compared with other classes, mentioning hundreds of pages of reference material, OS textbooks, and Intel x86 manuals.
+- Despite the difficulty, they also say the course was rewarding and taught them more than expected.
+- They describe an exam with many possible points, a very low average, and nearly a third of the class dropping, though the professor allowed a group retake that improved grades.
+- The poster argues that the course number and credit hours create false expectations because the workload is more intense than students expect from a 3-credit 3000-level course.
+- The source is useful for questions about perceived workload mismatch, not current policy.
+
+Answerable questions:
+- Why did a student argue CS3210 should have more credit hours?
+- What kinds of work make CS3210 demanding?
+- Is CS3210 described as rewarding despite difficulty?
+- What failure case could occur if a RAG answer treats old course complaints as current policy?
+
+Sample grounded answer based on this source:
+One student argues CS3210 feels heavier than a normal 3-credit 3000-level course because of intensive labs, large amounts of OS and architecture reading, and difficult exams. The same post also says the course is rewarding, so the better interpretation is high workload plus high learning value, not simply a bad course.

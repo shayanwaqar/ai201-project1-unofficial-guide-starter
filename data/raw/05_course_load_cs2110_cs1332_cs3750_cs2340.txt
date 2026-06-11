@@ -1,0 +1,26 @@
+Title: Course Load: CS2110, CS1332, CS3750, and CS2340 Together
+Source title: Course load for CS - r/gatech
+Source URL: https://www.reddit.com/r/gatech/comments/6nw681/course_load_for_cs/
+Source type: Reddit thread / student discussion
+Domain tags: CS2110, CS1332, CS3750, CS2340, homework, course load, schedule planning
+Corpus note: This is a manually curated source brief for a class RAG corpus. It is not a full reproduction of the source thread. It preserves the source URL and summarizes/paraphrases relevant student discussion so the RAG system can answer grounded questions.
+
+Summary:
+Students advise that combining CS2110, CS1332, CS3750, and CS2340 is likely to be difficult. Replies specifically warn against doing CS1332 or CS2110 homework at the last minute and describe CS2340 as a semester-long project course.
+
+Extracted source notes:
+- One commenter gives a blunt recommendation to drop either CS1332 or CS2110 and says the student will thank them later.
+- Another commenter says the student will definitely struggle with that set of courses.
+- A reply explains that whether CS1332 or CS2110 blocks progress depends on threads: Theory may need CS1332, while SysArch or Info may need CS2110.
+- A longer comment says the student cannot expect to do homework for these classes the day it is due unless they are exceptionally strong at programming.
+- That same comment describes CS2110 as no walk in the park, CS1332 homeworks as not easy, and CS2340 as a semester-long project.
+- The source is useful for advising against procrastination and overloaded CS schedules.
+
+Answerable questions:
+- Is it realistic to do CS2110/CS1332 homework the day it is due?
+- Which classes are students warning about in this schedule?
+- Why might someone drop either CS1332 or CS2110?
+- What kind of class is CS2340 described as?
+
+Sample grounded answer based on this source:
+Students warn that CS2110, CS1332, CS3750, and CS2340 together is a heavy load. The main advice is not to treat assignments as day-of work: CS2110 is difficult, CS1332 homework is not considered easy, and CS2340 is a semester-long project course.
