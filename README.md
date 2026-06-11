@@ -1,162 +1,162 @@
-# The Unofficial Guide — Project 1
+# The Unofficial Guide
 
-> **How to use this template:**
-> Complete each section *after* you've built and tested the corresponding part of your system.
-> Do not write placeholder text — if a section isn't done yet, leave it blank and come back.
-> Every section below is required for submission. One-liners will not receive full credit.
+## Project Overview
 
----
+The Unofficial Guide is a small RAG app for answering Georgia Tech CS course and student-experience questions from curated student discussion summaries. It is meant to answer practical questions about workload, difficulty, exams, projects, course combinations, systems courses, ML courses, and study advice.
 
-## Domain
+The app uses local ingestion/chunking, local embeddings with ChromaDB retrieval, Groq generation, and a simple Gradio interface.
 
-<!-- What topic or category of knowledge does your system cover?
-     Why is this knowledge valuable, and why is it hard to find through official channels?
-     Example: "Student reviews of CS professors at [university] — useful because official
-     course descriptions don't reflect teaching style, exam difficulty, or workload." -->
+## Domain and Document Sources
 
----
+The domain is Georgia Tech CS course/professor/student experience advice. This is useful because official course descriptions do not capture actual student experience, professor/semester variation, workload, exam style, or whether two courses are hard to combine.
 
-## Document Sources
+The corpus has 10 manually curated `.txt` source briefs in `data/raw/`:
 
-<!-- List every source you collected documents from.
-     Be specific: include URLs, subreddit names, forum thread titles, or file names.
-     Aim for variety — sources that together cover different subtopics or perspectives. -->
+1. `01_cs3510_algorithms_topics_study_strategy.txt`
+2. `02_gt_cs_hard_classes_cs3210_reputation.txt`
+3. `03_cs2340_objects_design_difficulty_value.txt`
+4. `04_cs_schedule_feasibility_1332_2110_2340_3600.txt`
+5. `05_course_load_cs2110_cs1332_cs3750_cs2340.txt`
+6. `06_cs1332_cs2110_finals_study_expectations.txt`
+7. `07_cs4641_machine_learning_difficulty_workload.txt`
+8. `08_cs2200_and_cs4641_combined_workload.txt`
+9. `09_cs3210_credit_hours_workload_petition.txt`
+10. `10_cs3210_vs_cs3220_comparison.txt`
 
-| # | Source | Type | URL or file path |
-|---|--------|------|-----------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
-| 6 | | | |
-| 7 | | | |
-| 8 | | | |
-| 9 | | | |
-| 10 | | | |
+## Chunking Strategy and Reasoning
 
----
+`ingest.py` loads all raw `.txt` files, removes repeated whitespace and boilerplate corpus notes, and creates paragraph-aware chunks. The target chunk size is about 300-500 words with about 75 words of overlap when a document creates multiple chunks. Metadata preserves `source`, `chunk_index`, `word_count`, and a stable chunk `id`.
 
-## Chunking Strategy
+The final corpus currently produces 10 chunks from 10 short documents. This is expected because most source briefs are already around 300-380 words. Keeping each document as one chunk avoids tiny fragments that separate a course name from the actual student advice.
 
-<!-- Describe your chunking approach with enough specificity that someone else could reproduce it.
-     Include:
-     - Chunk size (characters or tokens) and why that size fits your documents
-     - Overlap size and why (or why not) you used overlap
-     - Any preprocessing you did before chunking (e.g., stripping HTML, removing headers)
-     - What your final chunk count was across all documents -->
+## Sample Chunks
 
-**Chunk size:**
+Five labeled sample chunks are saved in `data/processed/chunk_samples.md`. The sample set includes:
 
-**Overlap:**
+- `01_cs3510_algorithms_topics_study_strategy__chunk_000`: CS3510 algorithms topics, proof/pseudocode focus, and study strategy.
+- `03_cs2340_objects_design_difficulty_value__chunk_000`: CS2340 difficulty, tests, Android, project/design work, and value.
+- `05_course_load_cs2110_cs1332_cs3750_cs2340__chunk_000`: Course-load advice for combining CS2110, CS1332, CS3750, and CS2340.
+- `08_cs2200_and_cs4641_combined_workload__chunk_000`: Combined workload for CS2200 and CS4641.
+- `10_cs3210_vs_cs3220_comparison__chunk_000`: CS3210 OS Design versus CS3220 Processor Design.
 
-**Why these choices fit your documents:**
+## Embedding Model and Production Tradeoffs
 
-**Final chunk count:**
+The embedding model is `sentence-transformers/all-MiniLM-L6-v2`. It is free, local, fast, and good enough for a small class-project corpus. ChromaDB stores the vectors persistently in `data/chroma/`, which is ignored by git.
 
----
+For production, I would compare stronger embedding models on exact course-code matching, informal student language, latency, cost, context length, multilingual support, and domain-specific performance. This project shows that pure semantic similarity can miss exact identifiers like `CS3510`, so a production version should add course-code filtering or reranking.
 
-## Embedding Model
+## Retrieval Test Results
 
-<!-- Name the embedding model you used and explain your choice.
-     Then answer: if you were deploying this system for real users and cost wasn't a constraint,
-     what tradeoffs would you weigh in choosing a different model?
-     Consider: context length limits, multilingual support, accuracy on domain-specific text,
-     latency, and local vs. API-hosted. -->
+`test_retrieval.py` writes `data/processed/retrieval_test_results.md`.
 
-**Model used:**
+Summary of three retrieval tests:
 
-**Production tradeoff reflection:**
-
----
+| Query | Result summary |
+|---|---|
+| What topics do students say are usually covered in CS3510? | The CS3510 chunk was retrieved, but ranked second behind a broader course-load chunk. |
+| Why do students say CS4641 can be stressful or time-consuming? | Retrieved the combined CS2200/CS4641 workload chunk first and the dedicated CS4641 difficulty chunk second. |
+| How do students distinguish CS3210 and CS3220? | Correctly retrieved the CS3210-vs-CS3220 comparison chunk first. |
 
 ## Grounded Generation
 
-<!-- Explain how your system enforces grounding — how does it prevent the LLM from answering
-     beyond the retrieved documents?
-     Describe both your system prompt (what instruction you gave the model) and any structural
-     choices (e.g., how you formatted the context, whether you filtered low-relevance chunks).
-     Do not just say "I told it to use the documents" — show the actual instruction or explain
-     the mechanism. -->
+`query.py` calls `retrieve()` first, then sends only the retrieved chunks to Groq model `llama-3.3-70b-versatile`. The system prompt tells the model to use only the provided context, not general knowledge, and to say:
 
-**System prompt grounding instruction:**
+> I don't have enough information to answer that from the provided documents.
 
-**How source attribution is surfaced in the response:**
+Source filenames are appended programmatically after generation, so source attribution does not depend only on the LLM remembering to cite.
 
----
+## Example Responses
 
-## Evaluation Report
+Question: `Why might taking CS2200 and CS4641 together be difficult?`
 
-<!-- Run your 5 test questions from planning.md through your system and record the results.
-     Be honest — a partially accurate or inaccurate result that you explain well is more
-     valuable than a suspiciously perfect result. -->
+Example answer: Taking CS2200 and CS4641 together can be difficult because CS2200 requires significant reading and fast-paced systems material, while CS4641 projects can take a lot of time to run and understand.
 
-| # | Question | Expected answer | System response (summarized) | Retrieval quality | Response accuracy |
-|---|----------|-----------------|------------------------------|-------------------|-------------------|
-| 1 | | | | | |
-| 2 | | | | | |
-| 3 | | | | | |
-| 4 | | | | | |
-| 5 | | | | | |
+Question: `How do students distinguish CS3210 and CS3220?`
 
-**Retrieval quality:** Relevant / Partially relevant / Off-target  
-**Response accuracy:** Accurate / Partially accurate / Inaccurate
+Example answer: Students describe CS3220 as more processor-design and implementation-heavy, while CS3210 is a deeper operating systems course with C, kernel work, virtual memory, user environments, and time-consuming labs.
 
----
+## Out-of-Scope Refusal Example
 
-## Failure Case Analysis
+For a question like `What is the best dining hall at Georgia Tech?`, the system should respond that it does not have enough information from the provided documents. The corpus only covers selected CS course/student-experience discussions, not dining or campus-life topics.
 
-<!-- Identify at least one question where retrieval or generation did not work as expected.
-     Write a specific explanation of *why* it failed, tied to a part of the pipeline.
+## Query Interface Description
 
-     "The answer was wrong" is not an explanation.
+`app.py` provides a Gradio web interface with:
 
-     "The relevant information was split across a chunk boundary, so retrieval returned
-     only half the context — the model didn't have enough to answer correctly" is an explanation.
+- a textbox for the user question
+- an Ask button
+- an answer output
+- a sources output
+- a retrieved chunks display for debugging/inspection
 
-     "The embedding model treated the professor's nickname as out-of-vocabulary and returned
-     results from an unrelated review" is an explanation. -->
+The CLI is also available through `query.py`.
 
-**Question that failed:**
+## Sample Interaction Transcript
 
-**What the system returned:**
+```text
+User: What topics do students say are usually covered in CS3510?
+System: For CS3510, students describe the core as algorithms theory: dynamic programming, divide and conquer, graph problems, number theory, and NP-completeness.
+Sources:
+- 05_course_load_cs2110_cs1332_cs3750_cs2340.txt
+- 01_cs3510_algorithms_topics_study_strategy.txt
+- ...
+```
 
-**Root cause (tied to a specific pipeline stage):**
+## Evaluation Report Summary
 
-**What you would change to fix it:**
+`evaluate.py` writes `data/processed/evaluation_report.md` using the five planning questions. The strongest results were the CS4641 workload, CS2200+CS4641 combination, and CS3210-vs-CS3220 comparison questions. The weakest results were CS3510 questions, where retrieval sometimes ranked broader course-planning documents above the specific CS3510 document or missed the CS3510 document.
 
----
+## Honest Failure Case
+
+The known failure case is CS3510 retrieval ranking. The query `What topics do students say are usually covered in CS3510?` can retrieve a broader course-load document before the specific CS3510 algorithms document. The query `Is CS3510 more coding-heavy or proof-heavy?` can miss the specific CS3510 chunk entirely and cause the generator to refuse.
+
+This is caused by the retrieval stage, not the generator. The corpus is small, each document is one chunk, and broad course-planning language can look semantically similar to specific course questions. A future fix would add exact course-code matching or reranking before sending chunks to the LLM.
 
 ## Spec Reflection
 
-<!-- Reflect on how planning.md shaped your implementation.
-     Answer both questions with at least 2–3 sentences each. -->
+One way `planning.md` helped was that it made the chunking and retrieval choices concrete before implementation. The scripts followed the planned structure: paragraph-aware chunking, `all-MiniLM-L6-v2`, ChromaDB, `top_k=5`, and source filename metadata.
 
-**One way the spec helped you during implementation:**
-
-**One way your implementation diverged from the spec, and why:**
-
----
+One way implementation diverged is that the current documents are short enough that each source became one chunk. The planned overlap logic still exists for longer future documents, but the current corpus does not need overlapping chunks. Another practical divergence is that retrieval quality shows a need for course-code reranking, which was not implemented because Milestone 6 focuses on evaluation artifacts rather than changing core behavior.
 
 ## AI Usage
 
-<!-- Describe at least 2 specific instances where you used an AI tool during this project.
-     For each: what did you give the AI as input, what did it produce, and what did you
-     change, override, or direct differently?
+Instance 1:
 
-     "I used Claude to help me code" is not sufficient.
-     "I gave Claude my Chunking Strategy section from planning.md and asked it to implement
-     chunk_text(). It returned a function using a fixed character split. I overrode the
-     chunk size from 500 to 200 because my documents are short reviews, not long guides." -->
+- What I gave the AI: the Milestone 3 chunking plan from `planning.md` and the requirement to use only the Python standard library.
+- What it produced: `ingest.py`, including cleaning, paragraph-aware chunking, JSONL output, and sample chunk markdown.
+- What I changed or overrode: I kept the implementation simple and allowed one chunk per short source document instead of forcing artificial splits.
 
-**Instance 1**
+Instance 2:
 
-- *What I gave the AI:*
-- *What it produced:*
-- *What I changed or overrode:*
+- What I gave the AI: the Milestone 4 and 5 requirements for ChromaDB retrieval, Groq generation, and Gradio.
+- What it produced: `build_index.py`, `retrieve.py`, `query.py`, and `app.py`.
+- What I changed or overrode: I added local-first model loading for retrieval so repeated runs do not keep checking Hugging Face, and I kept generated Chroma files out of git.
 
-**Instance 2**
+## How to Run Locally
 
-- *What I gave the AI:*
-- *What it produced:*
-- *What I changed or overrode:*
+Create `.env` in the repo root:
+
+```bash
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+Install dependencies:
+
+```bash
+python3 -m pip install -r requirements.txt
+```
+
+Run the pipeline:
+
+```bash
+python3 ingest.py
+python3 build_index.py
+python3 evaluate.py
+python3 app.py
+```
+
+CLI query example:
+
+```bash
+python3 query.py "What topics do students say are usually covered in CS3510?"
+```
