@@ -1,122 +1,75 @@
-# Project 1 Planning: The Unofficial Guide
-
-> Write this document before you write any pipeline code.
-> Your spec and architecture diagram are what you'll use to direct AI tools (Claude, Copilot, etc.) to generate your implementation — the more specific they are, the more useful the generated code will be.
-> Update the Retrieval Approach and Chunking Strategy sections if you change your approach during implementation.
-> Update this file before starting any stretch features.
-
----
+# Project Planning: The Unofficial Guide
 
 ## Domain
 
-<!-- What domain did you choose? Why is this knowledge valuable and hard to find through official channels? -->
+The domain for this project is Georgia Tech CS course and professor/student experience advice. The system should answer questions about workload, difficulty, exams, projects, course combinations, systems courses, ML courses, and practical student advice.
 
----
+This knowledge is useful because official course descriptions usually explain catalog topics, but they do not capture what students actually experience in a class. Advice about workload, professor differences, exam style, project intensity, and which classes are hard to combine is scattered across Reddit-style and student discussion threads.
 
 ## Documents
 
-<!-- List your specific sources: URLs, subreddit names, forum threads, or file descriptions.
-     Aim for at least 10 sources that together cover different subtopics or perspectives within your domain. -->
-
-| # | Source | Description | URL or location |
-|---|--------|-------------|-----------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
-| 6 | | | |
-| 7 | | | |
-| 8 | | | |
-| 9 | | | |
-| 10 | | | |
-
----
+1. `01_cs3510_algorithms_topics_study_strategy.txt` - Student discussion summary about CS3510 algorithms topics, proof/pseudocode focus, workload, and study strategy.
+2. `02_gt_cs_hard_classes_cs3210_reputation.txt` - Student discussion summary about CS3210's reputation as a difficult upper-level systems course.
+3. `03_cs2340_objects_design_difficulty_value.txt` - Student discussion summary about CS2340 Objects and Design, including difficulty, teaching, tests, projects, Android, and group work.
+4. `04_cs_schedule_feasibility_1332_2110_2340_3600.txt` - Student advice about whether a schedule with CS1332, CS2110, CS2340, and CS3600 is manageable.
+5. `05_course_load_cs2110_cs1332_cs3750_cs2340.txt` - Student discussion summary about combining CS2110, CS1332, CS3750, and CS2340 in one course load.
+6. `06_cs1332_cs2110_finals_study_expectations.txt` - Student discussion summary about CS1332 and CS2110 finals, study guides, and exam expectations.
+7. `07_cs4641_machine_learning_difficulty_workload.txt` - Student discussion summary about CS4641 Machine Learning difficulty, projects, papers, tests, workload, theory, and statistics background.
+8. `08_cs2200_and_cs4641_combined_workload.txt` - Student advice about taking CS2200 and CS4641 together and deciding whether to drop one.
+9. `09_cs3210_credit_hours_workload_petition.txt` - Student discussion summary about CS3210 workload, labs, readings, exams, and whether the course credit hours match the effort.
+10. `10_cs3210_vs_cs3220_comparison.txt` - Student comparison of CS3210 OS Design and CS3220 Processor Design, including C/kernel work versus Verilog/FPGA work.
 
 ## Chunking Strategy
 
-<!-- How will you split documents into chunks?
-     State your chunk size (in tokens or characters), overlap size, and explain why those
-     numbers fit the structure of your documents.
-     A review-heavy corpus warrants different chunking than a long FAQ. -->
+I will use paragraph-aware recursive chunking with a target chunk size around 300-500 words and overlap around 75 words. Each chunk should preserve the source filename and chunk index as metadata.
 
-**Chunk size:**
-
-**Overlap:**
-
-**Reasoning:**
-
----
+This fits the corpus because the documents are short but usually contain multiple related points. Chunks that are too small may separate the course name or professor context from the actual advice. Chunks that are too large may mix workload, exams, projects, and scheduling advice in one retrieval result. Paragraph-aware chunking is better than blindly splitting every 500 characters because the student advice is organized in topic-sized paragraphs, and keeping those together should make retrieved context easier for the LLM to use.
 
 ## Retrieval Approach
 
-<!-- Which embedding model are you using (e.g., all-MiniLM-L6-v2 via sentence-transformers)?
-     How many chunks will you retrieve per query (top-k)?
-     If you were deploying this for real users and cost wasn't a constraint, what tradeoffs
-     would you weigh in choosing a different embedding model — context length, multilingual
-     support, accuracy on domain-specific text, latency? -->
+The embedding model will be `sentence-transformers/all-MiniLM-L6-v2`. The vector store will be ChromaDB, and retrieval will use semantic similarity search with an initial `top_k = 5`.
 
-**Embedding model:**
+`all-MiniLM-L6-v2` is free, local, and fast enough for this project. ChromaDB is simple to run locally and works well for a small class corpus. `top_k = 5` should give the LLM enough context to compare courses or mention multiple sources without overwhelming the prompt with too much retrieved text.
 
-**Top-k:**
-
-**Production tradeoff reflection:**
-
----
+For a production version, I would compare accuracy, latency, cost, multilingual support, informal language handling, and domain-specific performance. Student discussions can use casual language, abbreviations, and inconsistent phrasing, so a more expensive or domain-tuned embedding model might retrieve better results, but the local MiniLM setup is practical for this milestone project.
 
 ## Evaluation Plan
 
-<!-- List your 5 test questions with their expected correct answers.
-     Questions should be specific enough that you can judge whether the system's response
-     is right or wrong. "What are good dining halls?" is too vague.
-     "What do students say about wait times at [dining hall name] during lunch?" is testable. -->
-
-| # | Question | Expected answer |
-|---|----------|-----------------|
-| 1 | | |
-| 2 | | |
-| 3 | | |
-| 4 | | |
-| 5 | | |
-
----
+| # | Question                                                       | Expected answer                                                                                                                                                                                   |
+| - | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1 | What topics do students say are usually covered in CS3510?     | Dynamic programming, divide and conquer, graph algorithms, number theory/graph theory, and NP-completeness are commonly mentioned. Some topics vary by professor.                                 |
+| 2 | Is CS3510 more coding-heavy or proof-heavy?                    | Students describe CS3510 as more proof-heavy and pseudocode/math-focused than programming-heavy.                                                                                                  |
+| 3 | Why do students say CS4641 can be stressful or time-consuming? | Students mention time-consuming ML assignments/projects, long papers, algorithms that take time to run, broad tests, and the usefulness of statistics background.                                 |
+| 4 | Why might taking CS2200 and CS4641 together be difficult?      | CS2200 can require significant reading and fast-paced systems material, while CS4641 has time-consuming ML projects and conceptual work.                                                          |
+| 5 | How do students distinguish CS3210 and CS3220?                 | CS3220 is described as processor design with Verilog/FPGA implementation and pipelining, while CS3210 goes deeper into operating systems, C/kernel work, virtual memory, and time-consuming labs. |
 
 ## Anticipated Challenges
 
-<!-- What could go wrong? Name at least two specific risks with reasoning.
-     Consider: noisy or inconsistent documents, missing source attribution, off-topic
-     retrieval, chunks that split key information across boundaries. -->
-
-1.
-
-2.
-
----
-
-## Architecture
-
-<!-- Draw a diagram of your pipeline showing the five stages:
-     Document Ingestion → Chunking → Embedding + Vector Store → Retrieval → Generation
-     Label each stage with the tool or library you're using.
-     You can use ASCII art, a Mermaid diagram, or embed a sketch as an image.
-     You'll use this diagram as context when prompting AI tools to implement each stage. -->
-
----
+- Some documents discuss multiple courses at once, so retrieval may return a related but not fully specific chunk.
+- Student discussions are subjective and may vary by semester/professor.
+- If chunks are too small, the course name may be separated from the actual advice.
+- If citations are left only to the LLM, it may omit them, so source filenames should be appended programmatically.
 
 ## AI Tool Plan
 
-<!-- For each part of the pipeline below, describe:
-     - Which AI tool you plan to use (Claude, Copilot, ChatGPT, etc.)
-     - What you'll give it as input (which sections of this planning.md, which requirements)
-     - What you expect it to produce
-     - How you'll verify the output matches your spec
+- Ask Claude Code/Codex to implement ingestion/chunking using the Documents and Chunking Strategy sections.
+- Ask Claude Code/Codex to implement ChromaDB embedding/retrieval using the Retrieval Approach section.
+- Ask AI to help wire retrieval to Groq and Gradio while enforcing grounded answers.
+- Paste tracebacks or bad retrieval examples into AI for debugging.
+- Ask ChatGPT to help format README/evaluation results, but only after I provide actual outputs.
 
-     "I'll use AI to help me code" is not a plan.
-     "I'll give Claude my Chunking Strategy section and ask it to implement chunk_text()
-     with my specified chunk size and overlap" is a plan. -->
+## Architecture
 
-**Milestone 3 — Ingestion and chunking:**
-
-**Milestone 4 — Embedding and retrieval:**
-
-**Milestone 5 — Generation and interface:**
+```mermaid
+flowchart TD
+    A[Raw .txt files in data/raw] --> B[Document ingestion + cleaning]
+    B --> C[Paragraph-aware recursive chunking]
+    C --> D[all-MiniLM-L6-v2 embeddings]
+    D --> E[ChromaDB vector store with source metadata]
+    F[User query] --> G[User query embedding]
+    G --> H[Top-k semantic retrieval]
+    E --> H
+    H --> I[Grounded prompt with retrieved chunks]
+    I --> J[Groq llama-3.3-70b-versatile]
+    J --> K[Gradio UI showing answer + source filenames]
+```
